@@ -105,7 +105,7 @@ class Engine:
 
     def change_speed(self, s):
         pwma.ChangeDutyCycle(s)
-        print("speed" + s)
+        print("speed")
 
 
 # test
@@ -132,6 +132,7 @@ while 1:
     car.left_double(speed)
     time.sleep(1)
     car.right_double(speed)
+    GPIO.cleanup()
     break
 '''
 

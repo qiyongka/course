@@ -21,7 +21,7 @@ def run0():
                 # 以下引用运动及避障代码
                 car.start(90)
                 if con == False:
-                    break  # 说明：python的while循环无法实时退出，避免出问题需要适当确定con是否为False
+                    break  # 说明：python的while循环无法实时退出，需要定时确定con是否为False
             car.stop()  # 通信介入，车辆停止
             print(con)
             print("run0 jump")
