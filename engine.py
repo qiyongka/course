@@ -16,6 +16,7 @@ GPIO.setup(ENA, GPIO.OUT)
 pwma = GPIO.PWM(16, 80)
 pwma.start(90)
 speed = 90
+default_time = 3
 
 
 class Engine:
@@ -32,109 +33,121 @@ class Engine:
         self.INT4 = d
         self.ENA = e
 
-    def start(self, s):
+    def start(self, s, t=None):
         pwma.ChangeDutyCycle(s)
         GPIO.output(self.INT1, GPIO.HIGH)
         GPIO.output(self.INT2, GPIO.LOW)
         GPIO.output(self.INT3, GPIO.HIGH)
         GPIO.output(self.INT4, GPIO.LOW)
         print("start")
+        if t is not None:
+            time.sleep(t)
 
-    def stop(self):
+    def stop(self, t=None):
         GPIO.output(self.INT1, GPIO.LOW)
         GPIO.output(self.INT2, GPIO.LOW)
         GPIO.output(self.INT3, GPIO.LOW)
         GPIO.output(self.INT4, GPIO.LOW)
         print("stop")
+        if t is not None:
+            time.sleep(t)
 
-    def back(self, s):
+    def back(self, s, t=None):
         pwma.ChangeDutyCycle(s)
         GPIO.output(self.INT1, GPIO.LOW)
         GPIO.output(self.INT2, GPIO.HIGH)
         GPIO.output(self.INT3, GPIO.LOW)
         GPIO.output(self.INT4, GPIO.HIGH)
         print("back")
+        if t is not None:
+            time.sleep(t)
 
-    def forward_left_single(self, s):
+    def forward_left_single(self, s, t=None):
         pwma.ChangeDutyCycle(s)
         GPIO.output(self.INT1, GPIO.LOW)
         GPIO.output(self.INT2, GPIO.LOW)
         GPIO.output(self.INT3, GPIO.HIGH)
         GPIO.output(self.INT4, GPIO.LOW)
         print("fls")
+        if t is not None:
+            time.sleep(t)
 
-    def forward_right_single(self, s):
+    def forward_right_single(self, s, t=None):
         pwma.ChangeDutyCycle(s)
         GPIO.output(self.INT1, GPIO.HIGH)
         GPIO.output(self.INT2, GPIO.LOW)
         GPIO.output(self.INT3, GPIO.LOW)
         GPIO.output(self.INT4, GPIO.LOW)
         print("frs")
+        if t is not None:
+            time.sleep(t)
 
-    def back_left_single(self, s):
+    def back_left_single(self, s, t=None):
         pwma.ChangeDutyCycle(s)
         GPIO.output(self.INT1, GPIO.LOW)
         GPIO.output(self.INT2, GPIO.LOW)
         GPIO.output(self.INT3, GPIO.LOW)
         GPIO.output(self.INT4, GPIO.HIGH)
         print("bls")
+        if t is not None:
+            time.sleep(t)
 
-    def back_right_single(self, s):
+    def back_right_single(self, s, t=None):
         pwma.ChangeDutyCycle(s)
         GPIO.output(self.INT1, GPIO.LOW)
         GPIO.output(self.INT2, GPIO.HIGH)
         GPIO.output(self.INT3, GPIO.LOW)
         GPIO.output(self.INT4, GPIO.LOW)
         print("brs")
+        if t is not None:
+            time.sleep(t)
 
-    def left_double(self, s):
+    def left_double(self, s, t=None):
         pwma.ChangeDutyCycle(s)
         GPIO.output(self.INT1, GPIO.LOW)
         GPIO.output(self.INT2, GPIO.HIGH)
         GPIO.output(self.INT3, GPIO.HIGH)
         GPIO.output(self.INT4, GPIO.LOW)
         print("ld")
+        if t is not None:
+            time.sleep(t)
 
-    def right_double(self, s):
+    def right_double(self, s, t=None):
         pwma.ChangeDutyCycle(s)
         GPIO.output(self.INT1, GPIO.HIGH)
         GPIO.output(self.INT2, GPIO.LOW)
         GPIO.output(self.INT3, GPIO.LOW)
         GPIO.output(self.INT4, GPIO.HIGH)
         print("rd")
+        if t is not None:
+            time.sleep(t)
 
-    def change_speed(self, s):
+    def change_speed(self, s, t=None):
         pwma.ChangeDutyCycle(s)
         print("speed")
+        if t is not None:
+            time.sleep(t)
 
 
 # test
-'''
+
 car = Engine(11, 12, 13, 15, 16)
 while 1:
-    car.start(speed)
-    time.sleep(3)
-    car.stop()
-    time.sleep(3)
-    car.back(50)
-    time.sleep(3)
-    car.start(speed)
-    car.change_speed(65)
-    time.sleep(3)
-    car.forward_left_single(speed)
-    time.sleep(1)
-    car.forward_right_single(speed)
-    time.sleep(1)
-    car.back_left_single(speed)
-    time.sleep(1)
-    car.back_right_single(speed)
-    time.sleep(1)
-    car.left_double(speed)
-    time.sleep(1)
+    car.start(speed, default_time)
+    car.stop(6)
+    car.back(50, 5)
+    car.start(speed, 1)
+    car.change_speed(65, 2)
+    car.forward_left_single(speed, 1)
+    car.forward_right_single(speed, 2)
+    car.back_left_single(speed, 3)
+    car.back_right_single(speed, 4)
+    car.left_double(speed, 5)
     car.right_double(speed)
+    time.sleep(6)
     GPIO.cleanup()
     break
-'''
+
 
 
 

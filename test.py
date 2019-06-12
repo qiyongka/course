@@ -2,6 +2,7 @@
 import threading
 import time
 
+out = False
 flag = 0
 con = True
 cond = threading.Condition()
@@ -29,9 +30,12 @@ class MyThread (threading.Thread):
 
 
 def run0():
-    global con
+    global con, out
     while 1:
         if cond.acquire():
+            if out is True:
+                print("线程0退出")
+                return
             print("运动开始")
             while con:
                 print(con)
@@ -40,11 +44,11 @@ def run0():
                 print("1")
                 print("2")
                 print("3")
-                if con == False:
+                if con is False:
                     break
                 print("4")
                 print("5")
-                # time.sleep(1)
+                time.sleep(1)
                 # 以下引用运动及避障代码
             print(con)
             print("run0 jump")
@@ -54,7 +58,7 @@ def run0():
 
 
 def run1():
-    global con, flag
+    global con, flag, out
     while 1:
         if cond2.acquire():
             time.sleep(5)
@@ -67,17 +71,24 @@ def run1():
                 print("run1")
                 # 通讯处理代码段
                 print("通信处理开始")
+                '''
+                当需要退出时，使用中断让out置为True，三个线程相继退出
+                out = True
+                '''
                 time.sleep(3)
                 print("通信处理完成")
                 print(cond2)
                 cond2.release()
                 print(cond2)
+                if out is True:
+                    print("线程1退出")
+                    return
                 time.sleep(1)
             flag = 0
 
 
 def run2():
-    global con
+    global con, out
     while 1:
         print(cond2)
         if cond2.acquire():
@@ -97,13 +108,20 @@ def run2():
                 cond.release()
                 print(cond)
             cond2.release()
+            if out is True:
+                print("线程2退出")
+                return
             time.sleep(1)
 
 
 if __name__ == '__main__':
-    threading.Thread(target = run1).start()
-    threading.Thread(target = run0).start()
-    threading.Thread(target = run2).start()
+    thread1 = threading.Thread(target=run1)
+    thread2 = threading.Thread(target=run0)
+    thread3 = threading.Thread(target=run2)
+    thread1.start()
+    thread2.start()
+    thread3.start()
+
 
 
 
