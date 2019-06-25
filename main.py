@@ -1,6 +1,7 @@
 #!/usr/bin/env python2
 # -*- coding: utf-8 -*-
 
+'''
 from __future__ import division
 import cv2
 import time
@@ -69,3 +70,40 @@ while 1:
     
 cap.release()
 cv2.destroyAllWindows()
+'''
+
+'''
+
+此次修改后，该文件为总控文件
+Author： Zhang Jianxin
+
+
+'''
+
+
+
+import color_capture
+import time
+
+stop_tag = 0
+#停止标志
+obstacle_tag = 0
+#障碍物标志
+
+while 1:
+	#检测是否停止
+	#code here
+	if stop_tag==1:
+		#车子停下来
+		#摄像头寻找目标，直至找到为止
+		#code here 
+	elif stop_tag==0:
+		#车子在动
+		#检测障碍物
+		if obstacle_tag==0:
+			#没有障碍物，进入正常寻迹捕捉模式
+			#检测识别目标位置
+			#做出改变
+		elif obstacle_tag==1:
+			#进入避障程序
+			#code here
