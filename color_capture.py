@@ -1,13 +1,5 @@
 #!/usr/bin/env python2
 # -*- coding: utf-8 -*-
-"""
-* @par Copyright (C): 2010-2019, Shenzhen Yahboom Tech
-* @file         basic_writeAndrRead
-* @version      V1.0
-* @details
-* @par History
-* @author       LongfuSun
-"""
 
 from __future__ import division
 import cv2
