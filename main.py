@@ -1,13 +1,5 @@
 #!/usr/bin/env python2
 # -*- coding: utf-8 -*-
-"""
-* @par Copyright (C): 2010-2019, Shenzhen Yahboom Tech
-* @file         basic_writeAndrRead
-* @version      V1.0
-* @details
-* @par History
-* @author       LongfuSun
-"""
 
 from __future__ import division
 import cv2
@@ -49,7 +41,7 @@ cap=cv2.VideoCapture(0)
 cap.set(3,640)
 cap.set(4,480)
 
-#设置黄色的阙值
+#设置黄色的阙值 使用HSV空间
 yellow_lower=np.array([156,43,46])
 yellow_upper=np.array([180,255,255])
 
