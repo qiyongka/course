@@ -1,6 +1,16 @@
 import numpy as np
 import math
 
+new=['A','B','C']
+old = ['A','B']
+A=[99,1]
+B=[1,2]
+C=[2,5]
+D=[5,5]
+
+x=0
+y=0
+
 def angle_cacaulate(x_now,y_now,x_1,y_1):
 	pi =3.1415926
 
@@ -31,6 +41,7 @@ def route(new_array=[],A=[],B=[],C=[],D=[]):
 	for i in range(0,4):
 		pos.append([999,999])
 	#决定去哪个节点充电
+	print(pos)
 	for i in range(0,len(new_array)):
 		#节点坐标转换
 		if new_array[i] is 'A':
@@ -43,15 +54,19 @@ def route(new_array=[],A=[],B=[],C=[],D=[]):
 			pos[3] = D
 	#计算距离最小值
 	for j in range(0,len(pos)):
-		if pos[j] == [999,999]:
-			continue
-		else:
-			dis = distance([x,y],pos[j])
-			dist.append(dis)
+		dis = distance([x,y],pos[j])
+		dist.append(dis)
 
-	p = dist.index(min(dist))
+	mi = min(dist) 
+	p = dist.index(mi)
+
+	print(dist)
+	print(dis)
+	print(mi)
+
 	angle = angle_cacaulate(x,y,pos[p][0],pos[p][1])
 
 	return angle
 
+print(route(new,A,B,C,D))
 
